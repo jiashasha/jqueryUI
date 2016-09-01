@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="css/query-ui.css">
+</head>
+
+<body>
+    <input type="text" name="date" id="date" />
+    <div id="mydiv" style="width:100px;height:50px;border:1px solid #0ff;"></div>
+    <script type="text/javascript" src="js/jquery-1.8.0.js"></script>
+    <script type="text/javascript" src="js/jquery-ui.min.js"></script>
+    <script type="text/javascript">
+    $("#date").datepicker();
+    /**$("#mydiv").slider({
+        orientation: "vertical"
+    });
+
+    //小部件拓展
+    $.widget("custom.superDialog", $.ui.dialog, {
+        red: function() {
+            this.element.css("color", "blue");
+        }
+    });
+    // Create a new <div>, convert it into a superDialog, and call the red() method.
+    $("<div>I am red</div>")
+        .superDialog()
+        .superDialog("red");
+
+    //拓展已有的open方法
+    $.widget("custom.superDialog", $.ui.dialog, {
+        open: function() {
+            console.log("open");
+        }
+    });
+    // Create a new <div>, and convert it into a superDialog.
+    //$("<div>").superDialog();
+    //访问父部件
+   $.widget( "custom.superDialog", $.ui.dialog, {
+    _setOption: function( key, value ) {
+ 
+        // Both invoke dialog's setOption() method. _super() requires the arguments
+        // be passed as an argument list, _superApply() as a single array.
+        this._super( key, value );
+        this._superApply( arguments );
+    }
+});
+
+    $("<div>").superDialog().superDialog("_setOption");
+    //父部件插件不能调用子部件元素上的方法
+
+    $.widget("custom.superDialog", $.ui.dialog, {});
+    var dialog = $("<div>").superDialog();
+    // This works.
+    dialog.dialog("close");
+    // This doesn't.
+    //dialog.superDialog("close");
+
+    $.widget( "custom.progress", {
+    _create: function() {
+        var progress = this.options.value + "%";
+        this.element
+            .addClass( "progressbar" )
+            .text( progress );
+    }
+});
+    //$("#mydiv").progressbar({value:20});
+    $("<div></div>").appendTo("body").progress({value:10})
+**/
+    $.widget("custom.progressbar", {
+
+        options: {
+            value: 0
+        },
+
+        _create: function() {
+            var progress = this.options.value + "%";
+            this.element
+                .addClass("progressbar")
+                .text(progress);
+        },
+
+        // Create a public method.
+        value: function(value) {
+
+            // No value passed, act as a getter.
+            if (value === undefined) {
+                return this.options.value;
+            }
+
+            // Value passed, act as a setter.
+            this.options.value = this._constrain(value);
+            var progress = this.options.value + "%";
+            this.element.text(progress);
+        },
+
+        // Create a private method.
+        _constrain: function(value) {
+            if (value > 100) {
+                value = 100;
+            }
+            if (value < 0) {
+                value = 0;
+            }
+            return value;
+        }
+    });
+    var bar = $("<div></div>")
+        .appendTo("body")
+        .progressbar({
+            value: 20
+        });
+
+    // Get the current value.
+    alert(bar.progressbar("value"));
+
+    // Update the value.
+    bar.progressbar("value", 50);
+
+    // Get the current value again.
+    alert(bar.progressbar("value"));
+
+    </script>
+</body>
+
+</html>

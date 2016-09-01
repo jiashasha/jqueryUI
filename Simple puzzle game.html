@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>jQuery UI 放置（Droppable） - 拼图</title>
+    <link rel="stylesheet" type="text/css" href="css/jquery-ui.css">
+    <script type="text/javascript" src="js/jquery-1.8.0.js"></script>
+    <script type="text/javascript" src="js/jquery-ui.min.js"></script>
+    <style>
+    #draggable {
+        width: 40px;
+        height: 35px;
+        padding: 0.5em;
+        float: left;
+        margin: 10px 10px 10px 0;
+        background-image: url(img/ping2.jpg);
+        background-size: 100%;
+        background-repeat: no-repeat;
+    }
+    
+    #droppable {
+        width: 200px;
+        height: 200px;
+        padding: 0.5em;
+        float: left;
+        margin: 10px;
+        background-image: url(img/ping1.jpg);
+        background-size: 100%;
+        background-repeat: no-repeat;
+    }
+    
+    #droppable1 {
+        width: 55px;
+        height: 50px;
+        margin-top: 0px;
+        margin-left: 75px;
+    }
+    </style>
+    <script>
+    $(function() {
+        $("#dialog").dialog({
+            autoOpen: false,
+            width: 400,
+            buttons: [{
+                text: "Ok",
+                click: function() {
+                    $(this).dialog("close");
+                }
+            }, {
+                text: "Cancel",
+                click: function() {
+                    $(this).dialog("close");
+                }
+            }]
+        });
+        $("#draggable").draggable();
+        $("#droppable1").droppable({
+            drop: function(event, ui) {
+                //alert("success！！！");
+                $("#dialog").dialog("open");
+            }
+        });
+    });
+    </script>
+</head>
+
+<body>
+    <div id="draggable" class="ui-widget-content"></div>
+    <div id="droppable">
+        <div id="droppable1"></div>
+    </div>
+    <div id="dialog" title="拼图成功！">
+        <p>恭喜你！拼图成功~\(≧▽≦)/~啦啦啦</p>
+    </div>
+
+</body>
+
+</html>
